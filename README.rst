@@ -1,23 +1,17 @@
-INSTALL
-=======
-
-Use pathogen, or place in ~/.vim/plugins/.
-
-
 USE
 ===
 
-VisSum will return the sum of all visually selected numbers.
+``VisSum`` will return the sum of all visually selected numbers.
 The result is stored in the "@0" register, so you can paste
 the result via "0p
 
-VisMean is identical to the above but will comput the mean of
+``VisMean`` is identical to the above but will comput the mean of
 all visually selected numbers.
 
-VisMult will multiply all visually selected number by a constant.
-ex:
+``VisMult`` will multiply all visually selected number by a constant.
+ex::
 
-VisMult(2.0) 
+    VisMult(2.0) 
 
 Will multipy all selected values by 2.0, and change the current buffer in-place.
 
