@@ -10,21 +10,21 @@ The format of numbers in text may also be adjusted using the ``VisMult`` or
 
 Common use cases:
 
-    - Multiply many numbers by a constant.  Encounted when changing units.
+    - Multiply many numbers by a constant.  Encountered when changing units.
     - Compute sum or mean of column in text file and immediately paste result back into text.
     - Change format of numbers in text e.g. from scientific notation to decimal format.
 
 Install
 =======
 
-Vim must be compiled with +python support.
+Vim must be compiled with ``+python`` support.
 
 USE
 ===
 
 ``VisSum`` will return the sum of all visually selected numbers.
-The result is stored in the "@0" register, so you can paste
-the result via "0p
+The result is stored in the ``"@0"`` register, so you can paste
+the result via ``"0p``
 
 ``VisMean`` is identical to ``VisSum`` but will comput the mean of
 all visually selected numbers.
