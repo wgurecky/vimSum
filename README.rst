@@ -41,7 +41,8 @@ ex::
 
 will multipy all selected values by 2.0, and change the current buffer in-place.
 
-``VisMath`` will take any simple mathmatical expression with a character
+``VisMath`` will take any simple mathmatical expression of a single variable
+denoted by a character
 enclosed in parenthesis: ``(x)``.  Values from the visually selected text will be
 injected into the formula and the completed expression will be evaluated.  ex::
 
