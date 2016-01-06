@@ -22,6 +22,9 @@ Vim must be compiled with ``+python`` support.
 USE
 ===
 
+1) Select text using visual mode.
+2) Envoke one of the below scripts.  Ex: ``:'<, '>VisMath(2*exp(x), 2f)``
+
 ``VisSum`` will return the sum of all visually selected numbers.
 The result is stored in the ``"@0"`` register, so you can paste
 the result via ``"0p``
