@@ -67,7 +67,7 @@ EOF
 endfun
 
 
-fun! MultNumbers_Float_v2(m)
+fun! MultNumbers_Float_v2(m, ...)
 python << EOF
 
 import vim
@@ -88,7 +88,13 @@ def precision_and_scale(x):
     return (magnitude + scale, scale)
 
 # get argument from vim
-m = float(vim.eval("a:m").strip('()'))
+m = float(vim.eval("a:m").strip(',()'))
+fmt = '5e'
+try:
+    # allow user specified number format
+    fmt = str(vim.eval("a:1").strip('.,()'))
+except:
+    pass
 
 try:
     b = vim.current.buffer
@@ -107,12 +113,10 @@ try:
         for word in words:
             cleanWord = word.strip('.,')
             try:
-                # newbuffer += '{:.' + str(precision_and_scale(float(cleanWord))[0] - 1) + \
-                # 'e}'.format(float(cleanWord) * m)
                 if word == cleanWord:
-                    newbuffer += '{:.5e}'.format(float(cleanWord) * m)
+                    newbuffer += str('{:.' + fmt + '}').format(float(cleanWord) * m)
                 else:
-                    newbuffer += '{:.5e}'.format(float(cleanWord) * m) + '.'
+                    newbuffer += str('{:.' + fmt + '}').format(float(cleanWord) * m) + '.'
             except:
                 newbuffer += word 
             newbuffer += ' '
@@ -164,8 +168,63 @@ EOF
 
 endfun
 
+fun! MathNumbers_Float(m, ...)
+python << EOF
+
+import vim
+import re
+from math import *
+
+m = str(vim.eval("a:m").strip(','))  # strip commas from fomula str
+m = re.search("\(?(.*)\)", m).group(1)  # strip leading ( from formula if present
+fmt = '5e'
+try:
+    fmt = str(vim.eval("a:1").strip('.,()'))
+except:
+    pass
+
+def evalFormula(maths, word):
+    # might be missing a closing ) at the end of function string... maybe not?
+    try:
+        return float(eval(re.sub(r"\(\w?\)", "(" + str(word) + ")", maths + ')')))
+    except:
+        return float(eval(re.sub(r"\(\w?\)", "(" + str(word) + ")", maths)))
+
+try:
+    b = vim.current.buffer
+    starty, startx = vim.current.buffer.mark('<')
+    endy, endx = vim.current.buffer.mark('>')
+    lines = b[starty - 1:endy]
+    for i, line in enumerate(lines):
+        modline = line[startx:endx+1]
+        endline = line[endx+1:]
+        begline = line[:startx]
+        # concatenate all characters in a line into a line string
+        modline = ''.join(modline)
+        # split line string into words
+        words = modline.split()
+        newbuffer = ''
+        for word in words:
+            cleanWord = word.strip('.,')
+            try:
+                if word == cleanWord:
+                    newbuffer += str('{:.' + fmt + '}').format(evalFormula(m, cleanWord))
+                else:
+                    newbuffer += str('{:.' + fmt + '}').format(evalFormula(m, cleanWord)) + '.'
+            except:
+                newbuffer += word 
+            newbuffer += ' '
+        newbuffer += endline
+        newbuffer = begline + newbuffer
+        vim.current.buffer[starty - 1 + i] = newbuffer
+except:
+    print("An unexpected error occured.")
+EOF
+
+endfun
 
 command! -range -register -nargs=1 ResCol call Restruct_Cols(<f-args>)
-command! -range -register -nargs=1 VisMult call MultNumbers_Float_v2(<f-args>)
+command! -range -register -nargs=* VisMath call MathNumbers_Float(<f-args>)
+command! -range -register -nargs=* VisMult call MultNumbers_Float_v2(<f-args>)
 command! -range -register VisSum call SumNumbers_Float()
 command! -range -register VisMean call MeanNumbers_Float()
