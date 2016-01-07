@@ -175,20 +175,31 @@ import vim
 import re
 from math import *
 
-m = str(vim.eval("a:m").strip(','))  # strip commas from fomula str
-m = re.search("\(?(.*)\)", m).group(1)  # strip leading ( from formula if present
+m = str(vim.eval("a:m").strip('," '))  # strip commas from fomula str
+m = re.search("\(?(.*)", m).group(1)  # strip leading ( from formula if present
 fmt = '5e'
 try:
     fmt = str(vim.eval("a:1").strip('.,()'))
 except:
     pass
 
-def evalFormula(maths, word):
-    # might be missing a closing ) at the end of function string... maybe not?
-    try:
-        return float(eval(re.sub(r"\(\w?\)", "(" + str(word) + ")", maths + ')')))
-    except:
-        return float(eval(re.sub(r"\(\w?\)", "(" + str(word) + ")", maths)))
+def evalFormula(maths, word, depth=0):
+    completeForm = re.sub(r"\(\w?\)", "(" + str(word) + ")", maths)
+    if completeForm == maths:
+        print("Failed to find var in expression: " + maths)
+    else:
+        try:
+            evaluatedExpr = eval(completeForm)
+            if vim.eval("g:vimSumVerbose") == '1' or vim.eval("g:vimSumVerbose") == True:
+                print("Evaluated Expression: " + maths + " : where x=" + str(word))
+            else:
+                pass
+            return float(evaluatedExpr)
+        except:
+            if depth == 0:
+                evalFormula(maths + ')', word, depth=1)
+            else:
+                print("Failed to eval expression: " + maths)
 
 try:
     b = vim.current.buffer
@@ -223,6 +234,8 @@ EOF
 
 endfun
 
+" User defined verbosity setting for vimSum
+let g:vimSumVerbose = 0
 command! -range -register -nargs=1 ResCol call Restruct_Cols(<f-args>)
 command! -range -register -nargs=* VisMath call MathNumbers_Float(<f-args>)
 command! -range -register -nargs=* VisMult call MultNumbers_Float_v2(<f-args>)
