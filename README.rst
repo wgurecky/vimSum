@@ -50,7 +50,7 @@ injected into the formula and the completed expression will be evaluated.  ex::
 
 .. note::
 
-   If using whitespace in a formula string make sure to use an escape char ``\\ `` before it.
+   If using whitespace in a formula string make sure to use an escape char before it.
    ex:  ``VisMath(0.5*cos(x)\ +\ exp(x), 4e)``
 
 TODO
