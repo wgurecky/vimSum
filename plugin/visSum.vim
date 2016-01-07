@@ -199,7 +199,7 @@ def evalFormula(maths, word, depth=0):
             if depth == 0:
                 evalFormula(maths + ')', word, depth=1)
             else:
-                print("Failed to eval expression: " + maths)
+                pass
 
 try:
     b = vim.current.buffer
