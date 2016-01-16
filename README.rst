@@ -1,7 +1,10 @@
 VimSum
 ======
 
-VimSum is collection of simple scripts that provide the ability to perform basic calculations in vim.
+VimSum is a collection of simple scripts that provide the ability to perform basic calculations in vim.
+
+![GIF Demo](https://raw.github.com/wgurecky/vimSum/master/example/example_use.gif)
+
 The scripts can be used on columns of numbers by selecting them in visual mode.
 The scripts also can operate on mixed number/word paragraphs (only operating on
 numbers).
@@ -12,6 +15,7 @@ Common use cases:
 
     - Multiply many numbers by a constant.  Encountered when changing units.
     - Compute sum or mean of column in text file and immediately paste result back into text.
+    - Perform basic arithmetic on a column of numbers.
     - Change format of numbers in text e.g. from scientific notation to decimal format.
 
 Install
