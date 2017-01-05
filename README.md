@@ -46,19 +46,19 @@ the result via ``"0p``
 Identical to ``VisSum`` but will compute the mean of
 all visually selected numbers.
 
-### VisMult ### 
+### VisMult ###
 
 Multiply all visually selected number by a constant.  Format
 may be specified as an optional second argument.  ex: ``4e`` for 4
 digit decimal sci notation.  ``2f`` for two decimal floating str format.
 Example use:
 
-    :VisMult(2.0, 2f) 
+    :VisMult(2.0, 2f)
 
 will multiply all selected values by 2.0, format the result to include 2 digits
 trailing the decimal and change the current buffer in-place.
 
-### VisMath ### 
+### VisMath ###
 
 Evaluate any simple mathematical expression of a single variable
 denoted by a character
@@ -74,7 +74,7 @@ ex:  ``VisMath(0.5*cos(x)\ +\ exp(x), 4e)``
 TODO
 ====
 
-Automatically detect max required floating point print precision in VisMult by
+Automatically detect max required floating point print precision in ``VisMult`` by
 default
 
 In-place buffer change may not be desired.  Perhaps display edited buffer in new
