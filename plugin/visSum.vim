@@ -1,11 +1,14 @@
-if !has('python')
-    finish
-endif
+" if !has('python') && !has('nvim')
+"     finish
+" endif
 
 fun! SumNumbers_Float()
-python << EOF
+python3 << EOF
 
-import vim
+try:
+    import vim
+except:
+    import pynvim as vim
 
 try:
     b = vim.current.buffer
@@ -35,9 +38,12 @@ EOF
 endfun
 
 fun! MeanNumbers_Float()
-python << EOF
+python3 << EOF
 
-import vim
+try:
+    import vim
+except:
+    import pynvim as vim
 
 try:
     b = vim.current.buffer
@@ -67,10 +73,13 @@ EOF
 endfun
 
 
-fun! MultNumbers_Float_v2(m, ...)
-python << EOF
+fun! MultNumbers_Float(m, ...)
+python3 << EOF
 
-import vim
+try:
+    import vim
+except:
+    import pynvim as vim
 import math
 
 def precision_and_scale(x):
@@ -118,7 +127,7 @@ try:
                 else:
                     newbuffer += str('{:.' + fmt + '}').format(float(cleanWord) * m) + '.'
             except:
-                newbuffer += word 
+                newbuffer += word
             newbuffer += ' '
         newbuffer += endline
         newbuffer = begline + newbuffer
@@ -131,9 +140,12 @@ endfun
 
 
 fun! Restruct_Cols(colWidth)
-python << EOF
+python3 << EOF
 
-import vim
+try:
+    import vim
+except:
+    import pynvim as vim
 
 # get argument from vim
 colWidth = vim.eval("a:colWidth").strip('()')
@@ -169,9 +181,12 @@ EOF
 endfun
 
 fun! MathNumbers_Float(m, ...)
-python << EOF
+python3 << EOF
 
-import vim
+try:
+    import vim
+except:
+    import pynvim as vim
 import re
 from math import *
 
@@ -185,6 +200,7 @@ except:
 
 def evalFormula(maths, word, depth=0):
     completeForm = re.sub(r"\(\w?\)", "(" + str(word) + ")", maths)
+    print("CompleteForm: " + completeForm)
     if completeForm == maths:
         print("Failed to find var in expression: " + maths)
     else:
@@ -223,7 +239,8 @@ try:
                 else:
                     newbuffer += str('{:.' + fmt + '}').format(evalFormula(m, cleanWord)) + '.'
             except:
-                newbuffer += word 
+                print("no math done on line %d" % (i))
+                newbuffer += word
             newbuffer += ' '
         newbuffer += endline
         newbuffer = begline + newbuffer
@@ -235,9 +252,9 @@ EOF
 endfun
 
 " User defined verbosity setting for vimSum
-let g:vimSumVerbose = 0
+let g:vimSumVerbose = 1
 command! -range -register -nargs=1 ResCol call Restruct_Cols(<f-args>)
 command! -range -register -nargs=* VisMath call MathNumbers_Float(<f-args>)
-command! -range -register -nargs=* VisMult call MultNumbers_Float_v2(<f-args>)
+command! -range -register -nargs=* VisMult call MultNumbers_Float(<f-args>)
 command! -range -register VisSum call SumNumbers_Float()
 command! -range -register VisMean call MeanNumbers_Float()
