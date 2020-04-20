@@ -1,7 +1,7 @@
 VimSum
 ======
 
-VimSum is a collection of commands that perform basic arithmetic
+VimSum provides a collection of vim commands that perform basic arithmetic
 on visually selected numbers in neovim or vim.
 
 ![GIF Demo](https://raw.github.com/wgurecky/vimSum/master/example/example_use.gif)
@@ -37,6 +37,7 @@ the nvim-yarp plugin:
 
     Plug 'https://github.com/wgurecky/vimSum.git', { 'do' : 'vim +UpdateRemotePlugins +qall' }
     Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
 
 USE
 ===
@@ -93,7 +94,11 @@ Example Config
 It might be useful to create the following, or similar, aliases to the above
 functions in the vimrc:
 
-    xnoremap <leader>vs :VisSum
-    xnoremap <leader>va :VisMean
+    " aliases
+    xnoremap <leader>s :VisSum
+    xnoremap <leader>a :VisMean
     cnoreabbrev vm :VisMult(<cr>)
     cnoreabbrev vs :VisMath(<cr>)
+
+    " set verbosity
+    let g:vimSumVerbose = 1

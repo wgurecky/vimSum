@@ -73,10 +73,10 @@ class VimSumPlug(object):
             out_string = "'" + str(out_sum) + "'"
             self.vim.command("let @0="+out_string)
         except:
-            self.vim.out_write("An unexpected error occured." + "\n")
+            self.vim.out_write("VisSum: An unexpected error occured." + "\n")
 
 
-    @pynvim.command("VisMean", range='', sync=True)
+    @pynvim.command("VisMean", range='', sync=False)
     def vis_mean(self, range):
         """
         Computes mean of all vis sel numbers
@@ -98,11 +98,11 @@ class VimSumPlug(object):
             out_string = "'" + str(out_mean) + "'"
             self.vim.command("let @0="+out_string)
         except:
-            self.vim.out_write("An unexpected error occured." + "\n")
+            self.vim.out_write("VisMean: An unexpected error occured." + "\n")
 
 
-    @pynvim.function("VisMult", sync=True)
-    def vis_mult(self, m, a):
+    @pynvim.command("VisMult", range='', nargs='*', sync=False)
+    def vis_mult(self, args, range):
         """
         Multiply all vis selected numbers by a const
         Modifies buffer in-place by default
@@ -110,6 +110,7 @@ class VimSumPlug(object):
             m (float): multiplier
             a (str): output number format ex: '5f'
         """
+        m, a = args[0], args[1]
         buf = self.vim.current.buffer
         m = float(str(m).strip(',()'))
         fmt = '5e'
@@ -131,11 +132,11 @@ class VimSumPlug(object):
         try:
             self.op_vis_sel_words_in_buf(buf, _vis_mult, mod_in_place=True)
         except:
-            self.vim.out_write("An unexpected error occured." + "\n")
+            self.vim.out_write("VisMult: An unexpected error occured." + "\n")
 
 
-    @pynvim.function("VisMath", sync=True)
-    def vis_math(self, m, a):
+    @pynvim.command("VisMath", range='', nargs='*', sync=False)
+    def vis_math(self, args, range):
         """
         Performs Arithmetic on all vis sel numbers
         Modifies buffer in-place by default
@@ -143,6 +144,7 @@ class VimSumPlug(object):
             m (str): math string to eval ex: '2.0*pi*(x)'
             a (str): output number format ex: '5f'
         """
+        m, a = args[0], args[1]
         buf = self.vim.current.buffer
         m = str(m).strip('," ')  # strip commas from fomula str
         m = re.search("\(?(.*)", m).group(1)  # strip leading ( from formula if present
@@ -154,7 +156,8 @@ class VimSumPlug(object):
 
         def evalFormula(maths, word, depth=0):
             completeForm = re.sub(r"\(\w?\)", "(" + str(word) + ")", maths)
-            self.vim.out_write("CompleteForm: " + completeForm + "\n")
+            if self.vim.eval("g:vimSumVerbose") == '1' or self.vim.eval("g:vimSumVerbose") == True:
+                self.vim.out_write("Math Expression: " + completeForm + "\n")
             if completeForm == maths:
                 self.vim.out_write("Failed to find var in expression: " + maths + "\n")
             else:
@@ -183,7 +186,7 @@ class VimSumPlug(object):
         try:
             self.op_vis_sel_words_in_buf(buf, _vis_math, mod_in_place=True)
         except:
-            self.vim.out_write("An unexpected error occured." + "\n")
+            self.vim.out_write("VisMath: An unexpected error occured." + "\n")
 
 
 def find_sigfigs(x):
