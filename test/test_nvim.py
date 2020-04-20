@@ -52,5 +52,11 @@ def vis_math_test():
     nvim.command("wq! VisMath.out.txt")
 
 if __name__ == "__main__":
-    vis_mult_test()
-    vis_math_test()
+    try:
+        vis_mult_test()
+    except OSError:
+        pass
+    try:
+        vis_math_test()
+    except OSError:
+        pass
