@@ -4,7 +4,7 @@ python:
 dist: bionic
 addons:
     snaps:
-        - neovim
+        - nvim
 install:
     - pip install pynvim
 script:
