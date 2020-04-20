@@ -40,7 +40,7 @@ If using [vim-plug](https://github.com/junegunn/vim-plug) add the following to
     Plug 'https://github.com/wgurecky/vimSum.git', { 'do' : 'vim +UpdateRemotePlugins +qall' }
 
 
-## Vim8 ###
+### Vim8 ###
 
 Using vimSum with vim8 requires a remote plugin compatibility shim provided by
 the nvim-yarp plugin:
