@@ -27,7 +27,6 @@ def vis_mult_test():
 
     # Write resulting file out
     nvim.command("wq! VisMult.out.txt")
-    nvim.close()
 
 def vis_math_test():
     # create nvim instance
@@ -51,7 +50,6 @@ def vis_math_test():
 
     # Write resulting file out
     nvim.command("wq! VisMath.out.txt")
-    nvim.close()
 
 if __name__ == "__main__":
     vis_mult_test()
