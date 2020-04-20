@@ -1,0 +1,14 @@
+language: python
+python:
+    - "3.6"
+dist: bionic
+addons:
+    snaps:
+        - name: nvim
+          confinement: classic
+          channel: beta
+install:
+    - pip install pynvim
+script:
+    - cd test
+    - ./test_nvim.sh
