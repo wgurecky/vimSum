@@ -4,7 +4,9 @@ python:
 dist: bionic
 addons:
     snaps:
-        - nvim
+        - name: nvim
+          confinement: classic
+          channel: beta
 install:
     - pip install pynvim
 script:
