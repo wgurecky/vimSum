@@ -57,18 +57,18 @@ USE
 
     Ex: ``:'<, '>VisMath(2*exp(x), 2f)``
 
-### VisSum ###
+### :VisSum ###
 
 Return the sum of all visually selected numbers.
 The result is stored in the ``"@0"`` register, so you can paste
 the result via ``"0p``
 
-### VisMean ###
+### :VisMean ###
 
 Identical to ``VisSum`` but will compute the mean of
 all visually selected numbers.
 
-### VisMult ###
+### :VisMult ###
 
 Multiply all visually selected number by a constant.  Format
 may be specified as an optional second argument.  ex: ``4e`` for 4
@@ -85,7 +85,7 @@ a block of text in visual mode and then run:
 
     :VisMult(1.0, 5e)
 
-### VisMath ###
+### :VisMath ###
 
 Evaluate any simple mathematical expression of a single variable
 denoted by a character
