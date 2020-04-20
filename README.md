@@ -45,9 +45,8 @@ If using [vim-plug](https://github.com/junegunn/vim-plug) add the following to
 Using vimSum with vim8 requires a remote plugin compatibility shim provided by
 the nvim-yarp plugin:
 
-    Plug 'https://github.com/wgurecky/vimSum.git', { 'do' : 'vim +UpdateRemotePlugins +qall' }
+    Plug 'https://github.com/wgurecky/vimSum.git'
     Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
 
 USE
 ===

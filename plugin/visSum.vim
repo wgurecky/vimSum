@@ -12,5 +12,13 @@ if has('nvim')
     finish
 endif
 
-" TODO:
 " Define VisSum provided commands in vim8
+let s:vsplug = yarp#py3('visSum_wrap')
+
+func! VisSum(v)
+    return s:vsplug.call('vis_sum', a:v)
+endfunc
+
+func! VisMean(v)
+    return s:vsplug.call('vis_mean', a:v)
+endfunc
