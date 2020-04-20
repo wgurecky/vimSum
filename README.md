@@ -25,12 +25,20 @@ Install
 
 ### Neovim ###
 
+Requirements:
+
+- python3
+- pynvim
+
+Ensure the [pynvim](https://github.com/neovim/pynvim) python package is installed:
+
+- pip install pynvim
+
 If using [vim-plug](https://github.com/junegunn/vim-plug) add the following to
 `.vimrc`.
 
     Plug 'https://github.com/wgurecky/vimSum.git', { 'do' : 'vim +UpdateRemotePlugins +qall' }
 
-Ensure the [pynvim](https://github.com/neovim/pynvim) python package is installed.
 
 ## Vim8 ###
 
