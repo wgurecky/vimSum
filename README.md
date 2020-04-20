@@ -25,14 +25,22 @@ Install
 
 ### Neovim ###
 
+Requirements:
+
+- python3
+- pynvim
+
+Ensure the [pynvim](https://github.com/neovim/pynvim) python package is installed:
+
+    pip install pynvim
+
 If using [vim-plug](https://github.com/junegunn/vim-plug) add the following to
 `.vimrc`.
 
     Plug 'https://github.com/wgurecky/vimSum.git', { 'do' : 'vim +UpdateRemotePlugins +qall' }
 
-Ensure the [pynvim](https://github.com/neovim/pynvim) python package is installed.
 
-## Vim8 ###
+### Vim8 ###
 
 Using vimSum with vim8 requires a remote plugin compatibility shim provided by
 the nvim-yarp plugin:
@@ -49,18 +57,18 @@ USE
 
     Ex: ``:'<, '>VisMath(2*exp(x), 2f)``
 
-### VisSum ###
+### :VisSum ###
 
 Return the sum of all visually selected numbers.
 The result is stored in the ``"@0"`` register, so you can paste
 the result via ``"0p``
 
-### VisMean ###
+### :VisMean ###
 
 Identical to ``VisSum`` but will compute the mean of
 all visually selected numbers.
 
-### VisMult ###
+### :VisMult ###
 
 Multiply all visually selected number by a constant.  Format
 may be specified as an optional second argument.  ex: ``4e`` for 4
@@ -77,7 +85,7 @@ a block of text in visual mode and then run:
 
     :VisMult(1.0, 5e)
 
-### VisMath ###
+### :VisMath ###
 
 Evaluate any simple mathematical expression of a single variable
 denoted by a character
