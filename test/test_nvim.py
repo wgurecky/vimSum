@@ -6,7 +6,7 @@ sys.path.append("../rplugin/python3/.")
 from visSum import VimSumPlug
 
 # create nvim instance
-nvim = attach('child', argv=["/bin/env", "nvim", "--embed", "--headless"])
+nvim = attach('child', argv=["env", "nvim", "--embed", "--headless"])
 
 # load the input file
 nvim.command("edit VisMult.inp.txt")
