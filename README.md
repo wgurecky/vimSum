@@ -1,20 +1,19 @@
 VimSum
 ======
 
-VimSum is a collection of scripts that perform basic arithmetic 
-on visually selected numbers in vim.
+VimSum is a collection of commands that perform basic arithmetic
+on visually selected numbers in neovim or vim.
 
 ![GIF Demo](https://raw.github.com/wgurecky/vimSum/master/example/example_use.gif)
 
-The scripts can be used on columns of numbers by selecting them in visual mode.
-The scripts also can operate on mixed number/word paragraphs (only operating on
-numbers).
-The format of numbers in text may also be adjusted using the ``VisMult`` or
-``VisMath`` script.
+The arithmetic operations can be used on columns of numbers by selecting them in visual mode.
+The routines also can operate on mixed number/word paragraphs (only operating on numbers).
+The format of numbers in text may also be adjusted using this plugin, which allows easily
+switching between scientific notation and decimal representations. See the ``VisMult`` example.
 
 Common use cases:
 
-- Multiply many numbers by a constant.  Encountered when changing units.
+- Multiply numbers in text by a constant.  Encountered when changing units.
 - Compute sum or mean of column in text file and immediately paste result back into text.
 - Perform basic arithmetic on a column of numbers.
 - Change format of numbers in text e.g. from scientific notation to decimal format.
@@ -22,18 +21,30 @@ Common use cases:
 Install
 =======
 
-Vim must be compiled with ``+python`` support.
+### Neovim ###
 
 If using [vim-plug](https://github.com/junegunn/vim-plug) add the following to
 `.vimrc`.
 
-    Plug 'https://github.com/wgurecky/vimSum.git'
+    Plug 'https://github.com/wgurecky/vimSum.git', { 'do' : 'vim +UpdateRemotePlugins +qall' }
+
+Ensure the [pynvim](https://github.com/neovim/pynvim) python package is installed.
+
+## Vim8 ###
+
+Using vimSum with vim8 requires a remote plugin compatibility shim provided by
+the nvim-yarp plugin:
+
+    Plug 'https://github.com/wgurecky/vimSum.git', { 'do' : 'vim +UpdateRemotePlugins +qall' }
+    Plug 'roxma/nvim-yarp'
 
 USE
 ===
 
 1. Select text using visual mode.
-2. Invoke one of the commands below.  Ex: ``:'<, '>VisMath(2*exp(x), 2f)``
+2. Invoke one of the commands below.
+
+    Ex: ``:'<, '>VisMath(2*exp(x), 2f)``
 
 ### VisSum ###
 
@@ -58,6 +69,11 @@ Example use:
 will multiply all selected values by 2.0, format the result to include 2 digits
 trailing the decimal and change the current buffer in-place.
 
+For just changing the format from decimal representation to scientific; select
+a block of text in visual mode and then run:
+
+    :VisMult(1.0, 5e)
+
 ### VisMath ###
 
 Evaluate any simple mathematical expression of a single variable
@@ -71,12 +87,13 @@ __Note__:
 If using whitespace in a formula string make sure to use an escape char before:
 ex:  ``VisMath(0.5*cos(x)\ +\ exp(x), 4e)``
 
-TODO
-====
+Example Config
+=====
 
-Automatically detect max required floating point print precision in ``VisMult`` by
-default
+It might be useful to create the following, or similar, aliases to the above
+functions in the vimrc:
 
-In-place buffer change may not be desired.  Perhaps display edited buffer in new
-window??
-
+    xnoremap <leader>vs :VisSum
+    xnoremap <leader>va :VisMean
+    cnoreabbrev vm :VisMult(<cr>)
+    cnoreabbrev vs :VisMath(<cr>)
