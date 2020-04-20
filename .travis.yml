@@ -1,6 +1,12 @@
-before_install:
-    - sudo apt-get update
-    - sudo apt-get install neovim
+language: python
+python:
+    - "3.6"
+
+addons:
+    apt:
+	update: true
+        packages:
+            - neovim
 
 install:
     - pip install pynvim
