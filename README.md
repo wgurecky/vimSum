@@ -97,8 +97,8 @@ functions in the vimrc:
     " aliases
     xnoremap <leader>s :VisSum
     xnoremap <leader>a :VisMean
-    cnoreabbrev vm :VisMult(<cr>)
-    cnoreabbrev vs :VisMath(<cr>)
+    cnoreabbrev vm VisMult
+    cnoreabbrev ve VisMath
 
     " set verbosity
     let g:vimSumVerbose = 1
