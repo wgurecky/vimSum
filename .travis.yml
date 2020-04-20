@@ -1,15 +1,13 @@
 language: python
 python:
     - "3.6"
-
 addons:
     apt:
 	update: true
         packages:
             - neovim
-
 install:
     - pip install pynvim
-
 script:
-    - cd test && ./test_nvim.sh
+    - cd test
+    - exec test_nvim.sh
