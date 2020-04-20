@@ -32,7 +32,7 @@ Requirements:
 
 Ensure the [pynvim](https://github.com/neovim/pynvim) python package is installed:
 
-- pip install pynvim
+    pip install pynvim
 
 If using [vim-plug](https://github.com/junegunn/vim-plug) add the following to
 `.vimrc`.
