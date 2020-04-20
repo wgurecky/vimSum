@@ -1,8 +1,10 @@
 language: python
 python:
     - "3.6"
-before_install:
-    - sudo snaps install --beta nvim --classic
+dist: xenial
+addons:
+    snaps:
+        - neovim
 install:
     - pip install pynvim
 script:
