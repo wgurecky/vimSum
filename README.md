@@ -47,6 +47,7 @@ the nvim-yarp plugin:
 
     Plug 'https://github.com/wgurecky/vimSum.git'
     Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
 
 USE
 ===
