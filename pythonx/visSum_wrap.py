@@ -1,10 +1,7 @@
-import os
-import sys
-sys.path.append("../rplugin/python3/.")
-from visSum import VisSumPlug as _Vsp
+from visSum import VimSumPlug as _Vsp
 import vim
 
-_obj = _Vsp
+_obj = _Vsp(vim)
 
 def vis_sum(*args):
     return _obj.vis_sum(args)
