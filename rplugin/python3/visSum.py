@@ -34,7 +34,7 @@ class VimSumPlug(object):
             sel_line = line[startx:endx+1]
             sel_line = ''.join(sel_line)
             # split sel_line string into words
-            vis_sel_words = sel_line.split()
+            vis_sel_words = re.split(',| ', sel_line)
             new_line_buffer = ''
             for word in vis_sel_words:
                 cleanWord = word.strip('.,')
