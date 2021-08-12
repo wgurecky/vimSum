@@ -37,7 +37,7 @@ Ensure the [pynvim](https://github.com/neovim/pynvim) python package is installe
 If using [vim-plug](https://github.com/junegunn/vim-plug) add the following to
 `.vimrc`.
 
-    Plug 'https://github.com/wgurecky/vimSum.git', { 'do' : 'vim +UpdateRemotePlugins +qall' }
+    Plug 'https://github.com/wgurecky/vimSum.git', { 'do' : ':UpdateRemotePlugins' }
 
 
 ### Vim8 ###
